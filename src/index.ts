@@ -1,30 +1,8 @@
-import Express from './functions/server';
-import './databases/mongoose'
+import dotenv from 'dotenv'
+dotenv.config()
 
-interface Options {
-    port: number
-}
+import './connections/mongoose'
+import './connections/mercadopago'
 
-class Core {
-
-    public options: Options;
-    constructor(options: Options) {
-
-        console.log('[core] Core iniciado com sucesso.')
-
-        this.options = options
-        this.loadExpress()
-
-    }
-
-    public loadExpress() {
-        
-        console.log('[express] Express sendo iniciado.')
-        new Express(this.options.port)
-
-    }
-}
-
-new Core({
-    port: 3333
-})
+import app from './config/express'
+app.listen(3333, () => console.log('[express] Express iniciado na porta 3333'))

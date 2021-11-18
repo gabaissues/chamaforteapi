@@ -10,8 +10,6 @@ export default class UsersModal extends UsersServices {
     public async listenUsers() {
 
         const users = await UsersSchema.find()
-        console.log(users)
-
         return users
 
     }
@@ -52,6 +50,11 @@ export default class UsersModal extends UsersServices {
     public async deleteUserByEmail(email: string) {
 
         await UsersSchema.findOneAndDelete({ email })
+
+    }
+    public async editUserByEmail(email: string, options: IUser) {
+
+        await UsersSchema.findOneAndUpdate({ email }, options)
 
     }
 }

@@ -14,16 +14,16 @@ export default class Express {
 
         this.port = port
         this.express = express()
-
+        
         this.listen()
         this.middlewares()
         this.routes()
 
     }
 
-    public listen() {
+    private listen() {
 
-        return this.express.listen(this.port, () => console.log('[express] Servidor iniciado na porta ' + this.port))
+        this.express.listen(this.port, () => console.log('[express] Servidor iniciado na porta ' + this.port))
 
     }
 
@@ -39,9 +39,4 @@ export default class Express {
         this.express.use('/users', users)//Carregando a ROTA de autenticação
 
     }
-
-    public app() {
-        return this.express
-    }
-
 }

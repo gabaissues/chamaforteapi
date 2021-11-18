@@ -1,4 +1,7 @@
+import { IStock } from "./Stock.interfaces";
+
 export interface IOrder {
+    id: number,
     client: {
         name: string,
         telephone: string,
@@ -8,9 +11,10 @@ export interface IOrder {
     equipment: string,
     brand: string,
     problem: string,
-    date: string
-    hour: string,
+    date: string,
     value: number,
-    comments: string
+    comments: string,
+    tech: string,
+    pieces: IStock[],
     images: string[],
 }

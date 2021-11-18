@@ -21,7 +21,7 @@ export default class UsersServices {
     public async verifyUserByEmail(email: string) {
 
         const user = await UsersSchema.findOne({ email })
-        if(user) throw "O usuário existe"
+        if(user) throw "O usuário já existe em nosso banco de dados."
 
         return user
 
@@ -29,10 +29,8 @@ export default class UsersServices {
 
     public async verifyPassword(password: string, expected: string) {
 
-        const passwordDecrypted = decrypt(password)
-        if(passwordDecrypted != expected) throw "A senha esperada não coincide com a registrada"
-
-        return passwordDecrypted
+        if(password != expected) throw "A senha esperada não coincide com a registrada."
+        return password
 
     }
 }

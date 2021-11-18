@@ -1,5 +1,4 @@
 import mongoose from 'mongoose'
-import { encrypt } from '../config/crypto'
 import { IUser } from '../interfaces/Users.interfaces'
 
 export default mongoose.model('Users', new mongoose.Schema<IUser>({
@@ -8,12 +7,7 @@ export default mongoose.model('Users', new mongoose.Schema<IUser>({
     documentation: String,
     typeDocumentation: String,
     email: String,
-    password: {
-        type: String,
-        required: true,
-        select: false,
-        set: (value: string) => encrypt(value)
-    },
+    password: String,
     status: String,
     role: String,
     earn: Number,
