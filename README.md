@@ -1,0 +1,2 @@
+# ChamaForte API 
+API feita para manuseamento do painel e do aplicativo para que ambos conversem entre si e façam o melhor aproveito do sistema. A api foi feita com intuito de gerenciar três áreas, logs, orders e users.
