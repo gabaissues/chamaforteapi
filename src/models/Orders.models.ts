@@ -63,7 +63,10 @@ export default class OrdersModal extends OrdersServices {
 
     public async createLink(options: ICreateLink) {
 
-        console.log(options.soma)
+        const time = new Date()
+
+        const hours = time.getHours()
+        time.setHours(hours + 24)
 
         const preference = {
             items: [
@@ -72,7 +75,10 @@ export default class OrdersModal extends OrdersServices {
                     unit_price: options.soma,
                     quantity: 1
                 }
-            ]
+            ],
+            expires: true,
+            date_of_expiration: new Date(time),
+            notification_url: process.env.Notification_URL
         }
 
         const link = await mercadopago.preferences.create(preference)

@@ -86,6 +86,8 @@ export default class Orders {
             })
         })
 
+        soma = 0.50
+
         /* Criando o LINK */
 
         const link = await modal.createLink({
@@ -94,11 +96,13 @@ export default class Orders {
             soma
         })
 
+        console.log(link)
+
         /* Criando o PAYMENT */
         
         const paymentModal = new PaymentModal()
         const payment = await paymentModal.createPayment({
-            payment_id: link.body.id,
+            payment_id: link.body.collection_id,
             tech: req.params.email,
             value: soma,
             pieces: `${pieces}`
