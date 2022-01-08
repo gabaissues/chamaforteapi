@@ -3,9 +3,11 @@ import { Request, Response } from 'express'
 
 import OrdersModal from '../models/Orders.models'
 import PaymentModal from '../models/Payment.models'
+import UsersModal from '../models/Users.models'
 
 const modal = new PaymentModal()
 const ordersModal = new OrdersModal()
+const usersModal = new UsersModal()
 
 export default class PaymentController {
     public async listen(req: Request, res: Response) {
@@ -39,32 +41,78 @@ export default class PaymentController {
             const orders = await ordersModal.getOrdersByEmail(paymentDb.tech)
 
             //Atualizando os ORDERS
-            orders.forEach(x => {
 
-                ordersModal.editOrderById(x._id, { 
-                    id: x.id,
-                    client: x.client,
-                    images: x.images,
-                    value: x.value,
-                    equipment: x.equipment,
-                    brand: x.brand,
-                    problem: x.problem,
-                    date: x.date,
-                    comments: x.comments,
-                    tech: x.tech,
-                    pieces: x.pieces,
+            //O = Order
+            orders.forEach((o) => {
+
+                ordersModal.editOrderById(o._id, { 
+                    id: o.id,
+                    client: o.client,
+                    images: o.images,
+                    value: o.value,
+                    equipment: o.equipment,
+                    brand: o.brand,
+                    problem: o.problem,
+                    date: o.date,
+                    comments: o.comments,
+                    tech: o.tech,
+                    pieces: o.pieces,
                     status: 'pago'
                 })
                 
             })
+
+            //Buscando o técnico 
+            const tech = await usersModal.getUserByEmail(paymentDb.tech)
+
+            //Novo estoque
+            const stock = []
+
+            //Adicionando o novo estoque
+            tech.stock.forEach((s) => {
+                paymentDb.pieces.split(',').forEach((p) => {
+
+                    if(s.piece === p) {
+                        
+                        stock.push({ piece: s.piece, quantity: s.quantity - 1, value: s.value, pieceId: s.pieceId  })
+
+                    } else {
+
+                        stock.push({ piece: s.piece, quantity: s.quantity, value: s.value, pieceId: s.pieceId  })
+
+                    }
+
+                })
+            })
+
+            //Editando o técnico
+            await usersModal.editUserByEmail(paymentDb.tech, { 
+                name: tech.name,
+                telephone: tech.telephone,
+                documentation: tech.documentation,
+                typeDocumentation: tech.typeDocumentation,
+                email: tech.email,
+                password: tech.password,
+                status: tech.status,
+                role: tech.role,
+                earn: tech.earn,
+                marketValue: tech.marketValue,
+                orders: tech.orders,
+                invoices: tech.invoices,
+                location: tech.location,
+                statistics: tech.statistics,
+                stock: stock  
+            })
+
 
             /*
             
                 [x] - Pegar todos as informações
                 [x] - Buscar o técnico
                 [x] - Setar como PAGO todas as faturas do técnico
-                [] - Remover as peças usadas do estoque do técnico
+                [x] - Remover as peças usadas do estoque do técnico
                 [] - Criar uma LOG informado que o pagamento do técnico tal foi aprovado
+                [] - Enviar a fatura pelo Whatsapp
 
             */
 
