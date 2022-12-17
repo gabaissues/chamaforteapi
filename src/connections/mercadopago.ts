@@ -1,6 +1,6 @@
 import mercadopago from 'mercadopago'
 
-mercadopago.configure({
+/*mercadopago.configure({
     sandbox: true,
     access_token: process.env.AcessTokenTST
-})
+})*/
