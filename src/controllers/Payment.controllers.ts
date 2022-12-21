@@ -119,7 +119,7 @@ export default class PaymentController {
                 [x] - Buscar o técnico
                 [x] - Setar como PAGO todas as faturas do técnico
                 [x] - Remover as peças usadas do estoque do técnico
-                [] - Criar uma LOG informado que o pagamento do técnico tal foi aprovado
+                [x] - Criar uma LOG informado que o pagamento do técnico tal foi aprovado
                 [] - Enviar a fatura pelo Whatsapp
 
             */
