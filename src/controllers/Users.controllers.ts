@@ -66,6 +66,7 @@ export default class Users {
 
         } catch(e) {
 
+            console.log(e)
             res.status(303).send({ message: e })
 
         }

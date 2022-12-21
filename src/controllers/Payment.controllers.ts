@@ -4,6 +4,7 @@ import { Request, Response } from 'express'
 import OrdersModal from '../models/Orders.models'
 import PaymentModal from '../models/Payment.models'
 import UsersModal from '../models/Users.models'
+import { IStock } from '../interfaces/Stock.interfaces'
 
 const modal = new PaymentModal()
 const ordersModal = new OrdersModal()
@@ -64,9 +65,10 @@ export default class PaymentController {
 
             //Buscando o técnico 
             const tech = await usersModal.getUserByEmail(paymentDb.tech)
+            if(!tech) return res.status(404).send({ message: 'Não foi encontrado o técnico' })
 
             //Novo estoque
-            const stock = []
+            const stock: IStock[] = []
 
             //Adicionando o novo estoque
             tech.stock.forEach((s) => {

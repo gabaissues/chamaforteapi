@@ -13,7 +13,7 @@ export default class UsersServices {
 
     public async getUserById(id: string) {
 
-        const user = await UsersSchema.findOne({ id })
+        const user = await UsersSchema.findOne({ _id: id })
         return user
 
     }

@@ -31,7 +31,7 @@ export default class UsersModal extends UsersServices {
     public async login(options: ILogin) {
 
         const account = await this.getUserByEmail(options.email)
-        await this.verifyPassword(account.password, options.password)
+        if(!account) throw "O usuário não foi encontrado."
 
         const token = jwt.sign({ user: account.id })
         return token
