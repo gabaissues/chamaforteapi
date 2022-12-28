@@ -1,6 +1,7 @@
 import { IStock } from "./Stock.interfaces";
 
 export interface IOrder {
+    _id?: number,
     id: number,
     client: {
         name: string,

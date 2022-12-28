@@ -1,3 +1,2 @@
 import mongoose from 'mongoose'
-
-mongoose.connect('mongodb://127.0.0.1:27017/chamaforte')
+mongoose.connect('mongodb+srv://gbxxy:ZJvLOv9B4K1c6AS1@database.cnddg.mongodb.net/?retryWrites=true&w=majority')

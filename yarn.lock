@@ -1272,6 +1272,11 @@
     jest-diff "^27.0.0"
     pretty-format "^27.0.0"
 
+"@types/mercadopago@^1.5.8":
+  version "1.5.8"
+  resolved "https://registry.yarnpkg.com/@types/mercadopago/-/mercadopago-1.5.8.tgz#baa64963c8e563c62ecbfc9cb1546af52cf7b9c8"
+  integrity sha512-tamrRo4Z5IfLmWXDm72l7egxzQzhM5sJJtSH7n1z4EJsS71T0PddybGMZmMJp5GRiNJhbc9Ts6ZxIJ2jfxzM9Q==
+
 "@types/mime@^1":
   version "1.3.2"
   resolved "https://registry.yarnpkg.com/@types/mime/-/mime-1.3.2.tgz#93e25bf9ee75fe0fd80b594bc4feb0e862111b5a"

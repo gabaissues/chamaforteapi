@@ -2,16 +2,22 @@ import { IOrder } from '../interfaces/Orders.interfaces'
 import OrdersSchema from '../schemas/Orders.schemas'
 
 export default class OrdersServices {
-    public async getOrdersByEmail(email: string) {
+    public async getOrdersByEmail(tech: string) {
 
-        const orders = await OrdersSchema.find({ email })
+        const orders = await OrdersSchema.find({ tech })
         return orders
 
     }
 
-    public async editOrderById(_id: string, edit: IOrder) {
+    public async editOrderById(id: number, edit: IOrder) {
 
-        return await OrdersSchema.updateOne({ _id }, edit)
+        if(isNaN(id)) throw "O ID é inválido"
+        
+        const order = await OrdersSchema.findOne({ id })
+        if(!order) throw "O ID é inválido"
+
+        const orderUpdated = await order.updateOne(edit)
+        return orderUpdated
 
     }
 

@@ -7,6 +7,7 @@ const controller = new PaymentController()
 
 router.get('/listen', controller.listen)
 router.get('/listen/:id', controller.listenAId)
+router.get('/create', (req, res) => console.log(req))
 router.post('/create', controller.create)
 router.delete('/delete/:id', controller.delete)
 
